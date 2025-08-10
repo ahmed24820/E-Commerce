@@ -1,6 +1,5 @@
 package com.my_project.e_commerce.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +23,8 @@ public class ShoppingCart {
 
     @OneToMany(mappedBy = "shoppingCart",fetch = FetchType.EAGER)
     private Set<CartItem>  cartitemSet;
-    }
+
+}
+
 
 

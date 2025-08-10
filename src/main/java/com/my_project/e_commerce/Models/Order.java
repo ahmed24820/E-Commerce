@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,21 +30,9 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderDetail> orderDetailList;
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", orderDate=" + orderDate +
-                ", deliveryDate=" + deliveryDate +
-                ", totalPrice=" + totalPrice +
-                ", tax='" + tax + '\'' +
-                ", paymentMethod='" + paymentMethod + '\'' +
-                ", user=" + user.getUsername() +
-                ", orderDetailList=" + orderDetailList.size() +
-                '}';
-    }
+    
 }
 

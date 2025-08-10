@@ -7,14 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
     private final UserRepo repo;
     @Override
-    public User Save(User customer) {
-        return repo.save(customer);
+    public User Save(User user) {
+        return repo.save(user);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return repo.findByUsername(username).get();
+    public Optional<User> findByUsername(String username) {
+        return repo.findByUsername(username);
     }
 }

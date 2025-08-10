@@ -3,7 +3,6 @@ package com.my_project.e_commerce.API;
 import com.my_project.e_commerce.Exceptions.NotFounded;
 import com.my_project.e_commerce.Mapper.UserMapper;
 import com.my_project.e_commerce.Models.User;
-import com.my_project.e_commerce.Repos.UserRepo;
 import com.my_project.e_commerce.Service.Implementation.UserServiceImp;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -98,8 +96,8 @@ public class AdminApi {
 
     @GetMapping("/user/{email}")
     public ResponseEntity<?>findUserByEmail(@PathVariable("email")String email) throws NotFounded{
-        if (userServiceImp.findByUsername(email)!=null) {
-            return ResponseEntity.ok(userMapper.map(userServiceImp.findByUsername(email)));
+        if (userServiceImp.findByUsername(email).isPresent()) {
+            return ResponseEntity.ok(userMapper.map(userServiceImp.findByUsername(email).get()));
        } else {
             throw new NotFounded("the user not founded");
         }

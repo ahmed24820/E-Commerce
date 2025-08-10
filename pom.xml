@@ -27,11 +27,11 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>23</java.version>
 		<maven.compiler.source>1.19</maven.compiler.source>
 		<maven.compiler.target>1.19</maven.compiler.target>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
-		<lombok.version>1.18.22</lombok.version>
+		<lombok.version>1.18.36</lombok.version>
 		<mapstruct-lombok.version>0.2.0</mapstruct-lombok.version>
 	</properties>
 	<dependencies>
@@ -76,7 +76,16 @@
 			<version>2.1.0</version>
 		</dependency>
 
+        <dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>rest-api-sdk</artifactId>
+			<version>1.14.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>

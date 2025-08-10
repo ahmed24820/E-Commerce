@@ -1,0 +1,67 @@
+package com.my_project.e_commerce.Payment.Controller;
+import com.my_project.e_commerce.Payment.Service.PayPalService;
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+
+@Controller
+@CrossOrigin(origins = "http://localhost:63342") // Allow cross-origin requests
+@RequestMapping("/paypal")
+public class PaymentController {
+
+    @Autowired
+    private  PayPalService payPalService;
+    public final String Successful_URL = "http://localhost:8080/paypal/pay/success";
+    public final String Cancel_URL = "http://localhost:8080/paypal/pay/cancel;";
+
+
+    // this method to check if the controller is working
+     @GetMapping("/")
+    public String Home(){
+        return "paypal";
+    }
+
+        
+        // this method to make a payment with paypal    
+    
+    @PostMapping("/pay")
+    public String makePayment(@RequestParam double amount) throws PayPalRESTException {
+
+        Payment payment = payPalService.createPayment(
+                amount,
+                "USD",
+                "PAYPAL",
+                "SALE",
+                "PAYMENT TEST",
+                Cancel_URL,
+                Successful_URL
+        );
+
+       // we will check for links in this payment
+        for (Links link : payment.getLinks()){
+          if (link.getRel().equals("approval_url")){
+             return "redirect:" + link.getHref();
+          }
+        }
+         return "Error processing Payment";
+    }
+
+    @GetMapping("/success")
+    public String success(@RequestParam String paymentId , @RequestParam String payerId) throws PayPalRESTException {
+       Payment payment = payPalService.execute(paymentId,payerId);
+       if (payment.getState().equals("approved")){
+          return "Payment has been successfully done ";
+       }
+        return "payment failed";
+    }
+
+    @GetMapping("/cancel")
+    public String cancel(){
+        return " payment canceled ";
+    }
+   
+}

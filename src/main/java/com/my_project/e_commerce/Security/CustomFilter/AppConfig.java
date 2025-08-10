@@ -1,16 +1,13 @@
 package com.my_project.e_commerce.Security.CustomFilter;
 
-import com.my_project.e_commerce.Repos.UserRepo;
-import lombok.AllArgsConstructor;
+import com.my_project.e_commerce.Service.Implementation.UserServiceImp;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,11 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
-     private final UserRepo userRepo;
+     private final UserServiceImp userServiceImp;
 
    @Bean
     public UserDetailsService userDetailsService(){
-        return username -> userRepo.findByUsername(username)
+        return username -> userServiceImp.findByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException("user can not be found"));
     }
 
@@ -43,4 +40,4 @@ public class AppConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-}
+ }

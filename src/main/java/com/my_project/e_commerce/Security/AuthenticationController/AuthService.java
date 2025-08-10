@@ -67,7 +67,7 @@ public class AuthService {
             emailServiceImp.SendConfirmationEmail(user.getFirstname(),user.getUsername(),confirmation.getConfirmationToken());
 
              return ResponseEntity.ok("Verify email by the link sent on your email address");
-    }
+         }
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request)  {

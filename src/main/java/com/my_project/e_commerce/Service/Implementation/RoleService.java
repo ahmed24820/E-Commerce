@@ -33,7 +33,7 @@ public class RoleService implements ApplicationListener<ContextRefreshedEvent> {
         Arrays.stream(roleNames).forEach((role) -> {
             Optional<Role> optionalRole = repo.findByName(role);
 
-            optionalRole.ifPresentOrElse(System.out::println, () -> {
+            optionalRole.ifPresentOrElse(System.out::println , () -> {
                 Role RoleToCreate = new Role();
                 RoleToCreate.setName(role);
                 RoleToCreate.setDescription(RoleDescriptionMap.get(role));

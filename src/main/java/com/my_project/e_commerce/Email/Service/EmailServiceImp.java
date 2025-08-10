@@ -1,6 +1,5 @@
 package com.my_project.e_commerce.Email.Service;
 
-import com.my_project.e_commerce.Email.Repo.ConfirmationRepo;
 import com.my_project.e_commerce.Email.Utils.EmailUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Log4j2
 public class EmailServiceImp implements EmailService {
-    private final ConfirmationRepo repo;
     private final JavaMailSender javaMailSender;
 
     @Value("${spring.mail.verify.host}")
@@ -24,7 +22,7 @@ public class EmailServiceImp implements EmailService {
 
 
     @Override
-   @Async
+    @Async
     public void SendConfirmationEmail(String name, String to, String token) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();

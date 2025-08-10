@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "Secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'Secret-key'"
+  },
+  {
+    "name": "access-token-expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'access-token-expiration'"
+  },
+  {
+    "name": "refresh-token-expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'refresh-token-expiration'"
+  },
+  {
+    "name": "spring.mail.verify.host",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.mail.verify.host'"
+  },
+  {
+    "name": "application-description",
+    "type": "java.lang.String",
+    "description": "A description for 'application-description'"
+  },
+  {
+    "name": "application-version",
+    "type": "java.lang.String",
+    "description": "A description for 'application-version'"
+  }
+]}
